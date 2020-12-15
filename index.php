@@ -14,7 +14,10 @@
     }
     // Connection to database
     require 'connection.php';
-
+//counting posts
+    $sql="select count(*) as num from blog";
+    $res=  mysqli_query($con, $sql);
+    $num=  mysqli_fetch_assoc($res);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +36,8 @@
                 <div class="left-container"></div>
                 <!-- Navigation Section -->
                 <nav>
+                                <img src="image/shopsky.jpg" style="height:50px;position: absolute;margin-top: 5px"/> <h5 style="margin-left:60px;position: absolute;margin-top: 10px;font-family: sans-serif;font-weight: 600;font-size: 30px">Shopsky</h5>
+
                     <ul>
                         <li class="toggle items"><button onclick="mytoggle()"><span class="bars"></span>
                         </button></li>
@@ -40,12 +45,20 @@
                         <li class="activated" id="contact"><a href="contact.html">Contact Us</a></li>
                         <li class="activated" id="about"><a href="about.php">About Us</a></li>
                         <?php
+                        if(isset($_SESSION['aid']))
+                        {
+                            ?>
+                        <li class="activated" id="home"><a href="mypost.php ">Wishlist</a></li>
+                        <?php
+                        }
+                        ?>
+                        <?php
                         if(isset($_SESSION['role']))
                         {
                             if($_SESSION['role']=='admin')
                             {
                                 ?>
-                        <li class="activated" id="about"><a href="add_post.php">Add Post</a></li>
+                        <li class="activated" id="about"><a href="add_post.php">Add Post</a> (<?= $num['num'] ?> posts)</li>
                         <?php
                             }
                         }
@@ -127,6 +140,7 @@
                         $result= $con->query("SELECT * FROM blog ORDER BY likes DESC");
                         $i=0;
                         foreach($result as $row) {
+                            $description=  substr(strip_tags($row["description"]),0,30);
                             $actives = '';
                             if($i == 6)
                             {
@@ -143,7 +157,7 @@
                         </div>
                         <div class="carousel-caption">
                             <h3 style="color: #00008B;"><?= $row['title'] ?></h3>
-                            <p style="color: #00008B;"><?= $row['description'] ?></p>
+                            <p style="color: c;"><?= $description.'...<span style="color:">(Read more)<span>'?></p>
                             <p style="color: #00008B;"><?= $row['date'] ?></p>
                         </div> 
                     </a>  
@@ -176,6 +190,8 @@
                     {
                         $result->data_seek($j);
                         $row = $result->fetch_array(MYSQLI_ASSOC);
+                         $description=  substr(strip_tags($row["description"]),0,30);
+
 
                         echo "<div class='popular-container-items'><a href='blog.php' id='".$row['bid']."'>";
                         echo "<div class='popular-container-image'>";
@@ -187,7 +203,7 @@
                         echo "<p>".$row['date']."</p>";
                         echo "<p>".$row['author']."</p>";
                         echo "</div>";
-                        echo "<div class='popular-container-bottom-left'>".$row['description']."</div>";
+                        echo "<div class='popular-container-bottom-left'>".$description.'...<m style="color:grey">(Read more)<m>'."</div>";
                         echo "</div>
                         </a>";
                         echo "</div>";
@@ -214,6 +230,7 @@
                         {
                             $result->data_seek($j);
                             $row = $result->fetch_array(MYSQLI_ASSOC);
+                             $description=  substr(strip_tags($row["description"]),0,30);
                             echo "<div class='popular-container-items'><a href='blog.php' id='".$row['bid']."'>";
                         echo "<div class='popular-container-image'>";
                         echo "<img src='image/".$row['image']."' class='image' style='height: -webkit-fill-available; max-height:20em;' >";
@@ -224,7 +241,7 @@
                         echo "<p>".$row['date']."</p>";
                         echo "<p>".$row['author']."</p>";
                         echo "</div>";
-                        echo "<div class='popular-container-bottom-left'>".$row['description']."</div>";
+                        echo "<div class='popular-container-bottom-left'>".$description.'...<m style="color:grey">(Read more)<m>'."</div>";
                         echo "</div>
                         </a>";
                         echo "</div>";

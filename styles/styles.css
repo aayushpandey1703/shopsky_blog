@@ -590,14 +590,14 @@ footer ul li i {
     flex-wrap: nowrap;
     padding: 1em 0 2em;
 }
-.total-div-container div:nth-child(2) .btn{
+.total-div-container div:nth-child(2) .bt1{
     font-size: 50px;
     margin-right: 1em;
     height: 100%;
     width: 0.5em;
     outline: none;
 }
-.total-div-container div:nth-child(2) button.btn{
+.total-div-container div:nth-child(2) button.bt1{
     border: none;
     background-color: transparent;
 }

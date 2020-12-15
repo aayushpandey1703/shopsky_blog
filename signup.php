@@ -54,17 +54,25 @@
         $umail = $_POST['u_email'];
         $upass = $_POST['u_password'];
 
-        $result= $con->query("SELECT name,password,role FROM login WHERE email='$umail'");
+        $result= $con->query("SELECT id,name,password,role FROM login WHERE email='$umail'");
         if($result->num_rows > 0)
         {
             $data = $result->fetch_array();
            if(password_verify($upass, $data['password']))
             {
                 $_SESSION['login_val'] = $data['name'];
+                $_SESSION['aid']=$data['id'];
                 $_SESSION['role']=$data['role'];
                 $_SESSION['last_login_timestamp'] = time();
+                if(isset($_SESSION['id_no']))
+                {
+                      echo "<script>window.location.href = 'blog.php'</script>";
+                $msg = 'log in successful';
+                }
+                else{
                 echo "<script>window.location.href = 'index.php'</script>";
                 $msg = 'log in successful';
+                }
             
             }
                         else

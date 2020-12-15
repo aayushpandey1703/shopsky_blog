@@ -13,7 +13,11 @@ if(isset($_SESSION['last_login_timestamp']))
         die();
     }
 }
-
+//connect db
+require 'connection.php';
+   $sql="select count(*) as num from blog";
+    $res=  mysqli_query($con, $sql);
+    $num=  mysqli_fetch_assoc($res);
 ?>
 
 
@@ -32,37 +36,65 @@ if(isset($_SESSION['last_login_timestamp']))
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
-        <header style="height: 100%;">
+      <header style="height: 100%;">
             <div class="total-section">
-                <!-- About Us Section -->
-                <div class="container"><h2>About Us</h2><br>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                </div>
-                <!-- Curve Section -->
-                <div class="curve">
-                </div>  
+                <!-- Header Left Section -->
+                <div class="left-container"></div>
                 <!-- Navigation Section -->
                 <nav>
+                                <img src="image/shopsky.jpg" style="height:50px;position: absolute;margin-top: 5px"/> <h5 style="margin-left:60px;position: absolute;margin-top: 10px;font-family: sans-serif;font-weight: 600;font-size: 30px">Shopsky</h5>
+
                     <ul>
-                        <li class="toggle items"><button><span class="bars"></span></button></li>
-                        <li class="" id="home"><a href="testing.php">Home</a></li>
-                        <li class="" id="contact"><a href="contact.html">Contact Us</a></li>
-                        <li class="active" id="about"><a href="#">About Us</a></li>
-                        <li class="login" id="login"><a href="
-                                <?php 
-                                if(isset($_SESSION['login_val']))
-                                {
-                                    echo "logout.php";
-                                }
-                                else{
-                                    echo "signup.php";
-                                }
+                        <li class="toggle items"><button onclick="mytoggle()"><span class="bars"></span>
+                        </button></li>
+                        <li class="active activated" id="home"><a href="index.php">Home</a></li>
+                        <li class="activated" id="contact"><a href="contact.html">Contact Us</a></li>
+                        <li class="activated" id="about"><a href="about.php">About Us</a></li>
+                         <?php
+                        if(isset($_SESSION['aid']))
+                        {
+                            ?>
+                        <li class="" id="home" ><a href="mypost.php" style="text-decoration:none;color:black">Wishlist</a></li>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if(isset($_SESSION['role']))
+                        {
+                            if($_SESSION['role']=='admin')
+                            {
                                 ?>
-                                ">
+                        <li class="activated" id="about"><a href="add_post.php">Add Post</a> (<?= $num['num'] ?> posts)</li>
+                        <?php
+                            }
+                        }
+                        ?>
+                        <li class="login activated" id="login"><a href="
+                                <?php 
+                                    if(isset($_SESSION['login_val']))
+                                    {
+                                        if($_SESSION['role']=='reader')
+                                        {
+                                        echo "logout.php";
+                                        }
+                                        else{
+                                            echo 'signup.php';
+                                        }
+                                    }
+                                    else{
+                                        echo "signup.php";
+                                    }
+                                ?>">
                                 <?php
                                         if(isset($_SESSION['login_val']))
                                         {
+                                            if($_SESSION['role']=='reader')
+                                            {
                                             echo "Logout";
+                                            }
+                                            else{
+                                                echo 'Add Admin';
+                                            }
                                         }
                                         else
                                         {
@@ -73,8 +105,18 @@ if(isset($_SESSION['last_login_timestamp']))
                         </li>
                     </ul>
                 </nav>
+                <!-- Header Matter Section-->
+                <div class="container">
+                    <span>Hello!!!</span>
+                    <h1>Welcome</h1>
+                    <span> To
+                        <span class="typed-text">
+                        </span>
+                        <span class="cursor">&nbsp;</span>
+                    </span>
+                </div>
             </div>
-        </header>
+    </header>
         <section>
             <!-- Who are we Section -->
             <div class="who-are-we">
