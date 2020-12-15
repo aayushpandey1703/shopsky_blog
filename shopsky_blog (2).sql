@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2020 at 03:14 PM
+-- Generation Time: Dec 15, 2020 at 08:56 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -42,12 +42,13 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`bid`, `author`, `image`, `title`, `description`, `date`, `likes`) VALUES
-(1, 'Aayush', 'proto.jpg', 'Comparison', 'This blog is for test purpose', '2020-12-05', 0),
+(1, 'Aayush', 'proto.jpg', 'Comparison', 'This blog is for test purpose', '2020-12-05', 1),
 (2, 'Aayush', 'apple-3840x2160-ios-10-4k-5k-live-wallpaper-live-photo-mount-macos-12000.jpg', 'web devlopement', 'Nature, in the broadest sense, is the natural, physical, or material world or universe. \"Nature\" can refer to the phenomena of the physical world, and also to life in general. The study of nature is a large, if not the only, part of science. Although humans are part of nature, human activity is often understood as a separate category from other natural phenomena', '2020-12-05', 2),
 (3, 'Aayush', 'Free-dark-background-wallpaper.jpg', 'Prototype', 'Test!!', '2020-12-05', 1),
 (4, 'Aayush', 'apple-3840x2160-ios-10-4k-5k-live-wallpaper-live-photo-mount-macos-12000.jpg', 'Title', 'Nature, in the broadest sense, is the natural, physical, or material world or universe. \"Nature\" can refer to the phenomena of the physical world, and also to life in general. The study of nature is a large, if not the only, part of science. Although humans are part of nature, human activity is often understood as a separate category from other natural phenomena', '2020-12-05', 0),
 (5, 'Aayush', 'grp.jpg', 'Dev', 'Prototype only', '2020-12-05', 0),
-(6, 'Aayush', 'person.jpeg', 'ML', '                Within the various uses of the word today             ', '2020-12-05', 1);
+(6, 'Aayush', 'person.jpeg', 'ML', '                Within the various uses of the word today             ', '2020-12-05', 1),
+(12, 'Aayush', '9owEWdo.jpg', 'yo', '<p><span style=\"text-decoration: underline;\"><em><strong>This blog is just for test putpose</strong></em></span></p>\r\n<p><span style=\"text-decoration: underline;\"><em><strong><img src=\"image/Free-dark-background-wallpaper.jpg\" alt=\"\" width=\"1536\" height=\"960\" /></strong></em></span></p>', '2020-12-14', 1);
 
 -- --------------------------------------------------------
 
@@ -71,7 +72,9 @@ INSERT INTO `coment` (`id`, `bid`, `name`, `coment`, `date`) VALUES
 ('', '', '', '', '2020-12-05'),
 ('2', '6', 'Aayush', 'Awsm blog!!!', '2020-12-05'),
 ('3', '2', 'Aayush Pandey', 'Test commen\'t!!', '2020-12-05'),
-('3', '3', 'Aayush Pandey', 'Cool!!\n', '2020-12-05');
+('3', '3', 'Aayush Pandey', 'Cool!!\n', '2020-12-05'),
+('3', '1', 'Aayush Pandey', 'Awsm!!\n', '2020-12-06'),
+('3', '12', 'Aayush Pandey', 'awsm\n', '2020-12-15');
 
 -- --------------------------------------------------------
 
@@ -112,7 +115,8 @@ CREATE TABLE `wishlist` (
 
 INSERT INTO `wishlist` (`id`, `bid`) VALUES
 ('2', '1'),
-('3', '3');
+('3', '3'),
+('2', '13');
 
 --
 -- Indexes for dumped tables
@@ -138,7 +142,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `login`
